@@ -1,0 +1,11 @@
+{
+  "version" : "1.0",
+  "strings" : [
+    {
+      "location" : "Location",
+      "starttime" : "Starting time",
+      "endtime" : "Ending time"
+    }
+
+  ]
+}

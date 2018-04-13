@@ -1,0 +1,14 @@
+{
+  "version" : "1.0",
+  "strings" : [
+    {
+      "location" : "Ort",
+      "starttime" : "Startzeit",
+      "endtime" : "Endzeit",
+      "street" : "Straße",
+      "city" : "Stadt",
+      "participate" : "Teilnehmen"
+    }
+
+  ]
+}
