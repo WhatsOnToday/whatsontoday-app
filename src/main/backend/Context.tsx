@@ -4,7 +4,7 @@ import MultiLang from "./MultiLang";
 export default class Context {
 
 
-    private _userLoggedIn = true;
+    private _userLoggedIn = false;
 
     private _gathering: Gathering = null;
     private _multilang: MultiLang = null;
