@@ -2,8 +2,9 @@ import ImageResource from "./model/ImageResource";
 
 export default class InternalDatabase {
 
-    constructor() {
 
+    isLoggedIn() : boolean {
+        return this.getXAuthToken()===null;
     }
 
     public getXAuthToken() : string{

@@ -15,8 +15,12 @@ export default class Gathering {
         this.api = api;
     }
 
-    login(mail, password) {
-        this.api.login(mail,password);
+
+    async tryLoginFromDatabaseToken() {
+        if (this.database.isLoggedIn()) {
+            //send loginRequest with token
+        }
+        return false;
     }
 
 

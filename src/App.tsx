@@ -2,43 +2,41 @@ import React, {Component} from "react";
 import {StyleSheet, View} from "react-native";
 
 import EventListScreen from "./main/components/EventListScreen";
-import ContextInitializer, {setContext} from "./main/backend/ContextInitializer";
+import ContextInitializer, {CONTEXT, setContext} from "./main/backend/ContextInitializer";
 import {DARK} from "./main/components/DefaultStyles";
 import {signIn} from "./main/backend/api/LoginRequests";
 import {queryEvents} from "./main/backend/api/EventRequests";
 import LoginScreen from "./main/components/LoginScreen";
-import Context from "./main/backend/Context";
+
 
 type Props = {};
 export default class App extends Component<Props> {
 
+    state = {
+        loggedIn : false,
+    };
+
+    constructor(props) {
+        super(props);
+
+        //this.testThings(ctx);
+    }
+
 
     public render() {
-        let ctx = ContextInitializer.initialize();
-        setContext(ctx);
-        //this.testThings(ctx);
 
         return (
             <View style={styles.defaultContainer}>
-                {this.getInitialScreen(ctx)}
+                <EventListScreen/>
             </View>
 
         );
 
-
-    }
-
-    private getInitialScreen(ctx : Context) {
-        if (ctx.userLoggedIn) {
-            return (<EventListScreen/>);
-        }
-        else {
-            return (<LoginScreen/>);
-        }
     }
 
 
-    private testThings(ctx:Context) {
+
+    private testThings() {
 
 
         signIn("werner@web.de","1234567",true).then(data=> {
@@ -67,6 +65,8 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
     defaultContainer: {
         backgroundColor: DARK,
+        height: "100%",
+        width: "100%",
     }
 });
 

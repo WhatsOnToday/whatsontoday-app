@@ -1,13 +1,13 @@
 import Gathering from "./Gathering";
 import MultiLang from "./MultiLang";
+import InternalDatabase from "./InternalDatabase";
 
 export default class Context {
 
 
-    private _userLoggedIn = false;
-
     private _gathering: Gathering = null;
     private _multilang: MultiLang = null;
+    private _databse: InternalDatabase;
 
     constructor(gathering: Gathering, multilang: MultiLang) {
         this._gathering = gathering;
@@ -24,14 +24,6 @@ export default class Context {
 
     userIsOnline() : boolean {
         return null;
-    }
-
-    get userLoggedIn(): boolean {
-        return this._userLoggedIn;
-    }
-
-    set userLoggedIn(value: boolean) {
-        this._userLoggedIn = value;
     }
 
 }
