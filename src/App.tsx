@@ -27,7 +27,7 @@ export default class App extends Component<Props> {
 
         return (
             <View style={styles.defaultContainer}>
-                <EventListScreen/>
+                <LoginScreen/>
             </View>
 
         );

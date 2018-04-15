@@ -9,14 +9,14 @@ const API_PATH = "/login";
  * @param {string} password
  * @param {boolean} rememberMe
  */
-export const signIn = (email, password, rememberMe) => {
+export const signIn = async function(email, password, rememberMe) {
     return axios.post("/login/signIn", {
         email,
         password,
         rememberMe,
     }).then(response => {
         console.log("response",response);
-        return response.data;
+        return response.data.token;
     }).catch(error => {
         handleError(error);
     });

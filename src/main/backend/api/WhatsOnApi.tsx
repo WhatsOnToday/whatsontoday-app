@@ -10,11 +10,12 @@ export default class WhatsOnApi {
 
 export const handleError = function(error) {
     if (error.response) {
-        switch (error.response.statusCode) {
+        switch (error.response.status) {
             case 401:
                 throw new AccessDeniedError("unauthorized");
         }
     }
+    console.log(error);
     throw new UnknownServerError();
 };
 

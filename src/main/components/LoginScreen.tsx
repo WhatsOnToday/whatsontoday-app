@@ -1,11 +1,13 @@
 import React from "react";
-import {Image,Button} from "react-native";
+import {Image, Button} from "react-native";
 
-import {StyleSheet, View,Text,TextInput} from "react-native";
+import {StyleSheet, View, Text, TextInput} from "react-native";
 import SocialMediaButton from "./SocialMediaButton";
 import CustomScreen from "./CustomScreen";
 import WhatsOnApi from "../backend/api/WhatsOnApi";
 import {LIGHTFONT, MAINGREEN} from "./DefaultStyles";
+import {CONTEXT} from "../backend/ContextInitializer";
+import {signIn} from "../backend/api/LoginRequests";
 
 
 type Props = {};
@@ -16,13 +18,20 @@ export default class LoginScreen extends CustomScreen<Props> {
         password: ""
     };
 
+    constructor(props) {
+        super(props);
+        this.startLogoAnimation = this.startLogoAnimation.bind(this);
+    }
+
     render() {
         let disabledLoginButton = (this.state.username === "") || (this.state.password === "");
 
         return (
             <View style={styles.container}>
                 <View style={styles.logoContainer}>
-                    <Image source={require("../../resources/images/wo_logo.png")} style={styles.logo}/>
+                    <Image source={require("../../resources/images/wo_logo.png")}
+                           style={styles.logo}
+                    />
                 </View>
 
                 <Text style={styles.title}>Finde dein nächstes Event!</Text>
@@ -32,19 +41,25 @@ export default class LoginScreen extends CustomScreen<Props> {
                         <Text style={styles.inputTitle}>Username</Text>
                         <TextInput underlineColorAndroid={MAINGREEN}
                                    style={styles.inputField}
-                                   onChangeText={(username) => this.setState({username})}/>
+                                   onChangeText={(username) => this.setState({username})}
+                        />
                     </View>
                     <View>
                         <Text style={styles.inputTitle}>Password</Text>
                         <TextInput underlineColorAndroid={MAINGREEN}
                                    style={styles.inputField}
                                    onChangeText={(password) => this.setState({password})}
-                                   secureTextEntry={true}/>
+                                   secureTextEntry={true}
+                        />
                     </View>
                 </View>
 
                 <View style={styles.loginButtonContainer}>
-                    <Button title="Login" onPress={this.onLogin} color={MAINGREEN} disabled={disabledLoginButton}/>
+                    <Button title="Login"
+                            onPress={() => this.onClickLogin()}
+                            color={MAINGREEN}
+                            disabled={disabledLoginButton}
+                    />
                 </View>
 
                 <View style={styles.mediaButtonContainer}>
@@ -57,10 +72,29 @@ export default class LoginScreen extends CustomScreen<Props> {
         );
     }
 
-    onLogin() {
-        console.log("login now...");
-        //Check pw
-        //Login
+    onClickLogin() {
+        console.log("logging in ...")
+        this.startLogoAnimation();
+        this.login(this.state.username, this.state.password);
+    }
+
+
+    login(username, password) {
+        signIn(username, password, true).then(token => {
+            console.log("Token=", token);
+        }).catch(error => {
+            console.log("Error=", error);
+            this.stopLogoAnimation();
+            //show error
+        });
+    }
+
+    startLogoAnimation() {
+        //TODO: animate logo
+    }
+
+    stopLogoAnimation() {
+        //start
     }
 
 }
@@ -96,7 +130,7 @@ const styles = StyleSheet.create({
         flexWrap: "wrap",
     },
     inputField: {
-      color: LIGHTFONT,
+        color: LIGHTFONT,
         fontSize: 20,
     },
     loginButtonContainer: {
