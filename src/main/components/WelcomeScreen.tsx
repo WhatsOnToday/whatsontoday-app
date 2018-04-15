@@ -8,7 +8,8 @@ export default class WelcomeScreen extends Component<Props> {
 
     state = {
         showLoginView: false,
-        logoContainerAnim: new Animated.Value(100),
+        logoContainerAnim: new Animated.Value(400),
+        loginOpacityAnim: new Animated.Value(0)
     };
 
     constructor(props) {
@@ -28,16 +29,12 @@ export default class WelcomeScreen extends Component<Props> {
         this.onStart();
         return (
             <View style={styles.container}>
-                <Animated.View  style={[
-                    styles.logoContainer,
-                    {height: "100%"}
-                ]}
-                >
+                <Animated.View  style={[styles.logoContainer, {height: this.state.logoContainerAnim}]}>
                     <Image source={require("../../resources/images/wo_logo.png")}
                            style={styles.logo}
                     />
                 </Animated.View>
-                {this.state.showLoginView ? <LoginView/> : undefined}
+                <LoginView opacity={this.state.loginOpacityAnim}/>
 
             </View>
         );
@@ -69,10 +66,19 @@ export default class WelcomeScreen extends Component<Props> {
         Animated.timing(
             this.state.logoContainerAnim,
             {
-                toValue: 30,
-                duration: 1000,
+                toValue: 150,
+                duration: 2000,
             }
-        ).start();
+        ).start(() => {
+            Animated.timing(
+                this.state.loginOpacityAnim,
+                {
+                    toValue: 1,
+                    duration: 10000,
+                }
+            ).start();
+        });
+
 
         //TODO: Fade in loginView
     }

@@ -1,17 +1,13 @@
-import React from "react";
+import React, {Component} from "react";
 import {Image, Button} from "react-native";
 
 import {StyleSheet, View, Text, TextInput} from "react-native";
 import SocialMediaButton from "./SocialMediaButton";
-import CustomScreen from "./CustomScreen";
-import WhatsOnApi from "../backend/api/WhatsOnApi";
 import {LIGHTFONT, MAINGREEN} from "./DefaultStyles";
-import {CONTEXT} from "../backend/ContextInitializer";
 import {signIn} from "../backend/api/LoginRequests";
 
 
-type Props = {};
-export default class LoginView extends CustomScreen<Props> {
+export default class LoginView extends Component {
 
     state = {
         username: "",
