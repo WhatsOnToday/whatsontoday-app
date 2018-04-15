@@ -1,20 +1,17 @@
-import React, {Component} from "react";
-import {StyleSheet, View} from "react-native";
-
 import EventListScreen from "./main/components/EventListScreen";
 import ContextInitializer, {CONTEXT, setContext} from "./main/backend/ContextInitializer";
 import {DARK} from "./main/components/DefaultStyles";
 import {signIn} from "./main/backend/api/LoginRequests";
 import {queryEvents} from "./main/backend/api/EventRequests";
-import LoginScreen from "./main/components/LoginScreen";
+import LoginView from "./main/components/LoginView";
+import WelcomeScreen from "./main/components/WelcomeScreen";
+import EventListView from "./main/components/EventListView";
+import React,{Component} from "react";
+import {StyleSheet, View} from "react-native";
 
 
 type Props = {};
 export default class App extends Component<Props> {
-
-    state = {
-        loggedIn : false,
-    };
 
     constructor(props) {
         super(props);
@@ -27,23 +24,39 @@ export default class App extends Component<Props> {
 
         return (
             <View style={styles.defaultContainer}>
-                <LoginScreen/>
+                {this.getInitialScreen()}
             </View>
 
         );
 
     }
 
+    private getInitialScreen() {
+
+        if (CONTEXT) {
+            //TODO: Return event list
+        }
+
+        return (
+            <View style={styles.defaultContainer}>
+                <WelcomeScreen onFinishedStartupRoutine={() => this.onFinishedStartupRoutine()}/>
+            </View>
+        );
+    }
+
+    private onFinishedStartupRoutine() {
+        //navigate to event list
+    }
 
 
     private testThings() {
 
 
-        signIn("werner@web.de","1234567",true).then(data=> {
+        signIn("werner@web.de", "1234567", true).then(data => {
             console.log(data);
             return data;
-        }).catch(error=> {
-            console.log("Error",error);
+        }).catch(error => {
+            console.log("Error", error);
         });
 
         /*
@@ -53,9 +66,6 @@ export default class App extends Component<Props> {
             console.log(error);
         });
         */
-
-
-
 
 
     }

@@ -5,11 +5,13 @@ import WhatsOnApi from "./api/WhatsOnApi";
 import Gathering from "./Gathering";
 
 export default class ContextInit {
-    public static initialize(): Context {
+    public static async initialize() {
         const multilang = new MultiLang();
         const database = new InternalDatabase();
         const api = new WhatsOnApi();
         const gathering = new Gathering(database, api);
+
+        database.initialize();
 
         return new Context(gathering, multilang);
     }

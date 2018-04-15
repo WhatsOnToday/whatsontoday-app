@@ -11,7 +11,7 @@ import {signIn} from "../backend/api/LoginRequests";
 
 
 type Props = {};
-export default class LoginScreen extends CustomScreen<Props> {
+export default class LoginView extends CustomScreen<Props> {
 
     state = {
         username: "",
@@ -28,11 +28,6 @@ export default class LoginScreen extends CustomScreen<Props> {
 
         return (
             <View style={styles.container}>
-                <View style={styles.logoContainer}>
-                    <Image source={require("../../resources/images/wo_logo.png")}
-                           style={styles.logo}
-                    />
-                </View>
 
                 <Text style={styles.title}>Finde dein nächstes Event!</Text>
 
@@ -106,15 +101,7 @@ const styles = StyleSheet.create({
         height: "100%",
         width: "100%",
     },
-    logoContainer: {
-        height: 150,
-        width: 150,
-        marginTop: 40,
-    },
-    logo: {
-        height: 150,
-        width: 150,
-    },
+
     title: {
         marginTop: 30,
         fontSize: 30,

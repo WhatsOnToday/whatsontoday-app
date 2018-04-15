@@ -31,4 +31,7 @@ export default class InternalDatabase {
         return location;
     }
 
+    public initialize() {
+        //load user data from database or created it with defaults
+    }
 }
